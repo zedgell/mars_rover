@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>StackOverflow test bed</title>
+    <script type="text/javascript">
+        function drawGrid() {
+            var cnv = document.getElementById("cnv");
+            
+            var gridOptions = {
+                minorLines: {
+                    separation: 5,
+                    color: '#00FF00'
+                },
+                majorLines: {
+                    separation: 90,
+                    color: '#00ff00'
+                }
+            };
+
+            
+            drawGridLines(cnv, gridOptions.majorLines);
+
+            return;
+        }
+
+        function drawGridLines(cnv, lineOptions) {
+
+
+            var iWidth = cnv.width;
+            var iHeight = cnv.height;
+
+            var ctx = cnv.getContext('2d');
+
+            ctx.strokeStyle = lineOptions.color;
+            ctx.strokeWidth = 1;
+            
+            ctx.beginPath();
+
+            var iCount = null;
+            var i = null;
+            var x = null;
+            var y = null;
+
+            iCount = Math.floor(iWidth / lineOptions.separation);
+
+            for (i = 1; i <= iCount; i++) {
+                x = (i * lineOptions.separation);
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, iHeight);
+                ctx.stroke();
+            }
+
+
+            iCount = Math.floor(iHeight / lineOptions.separation);
+
+            for (i = 1; i <= iCount; i++) {
+                y = (i * lineOptions.separation);
+                ctx.moveTo(0, y);
+                ctx.lineTo(iWidth, y);
+                ctx.stroke();
+            }
+
+            ctx.closePath();
+
+            return;
+        }
+
+    </script>
+</head>
+<body onload="drawGrid()" background="/pics/bg.jpg">
+    <canvas id="cnv" width="1350" height="645"></canvas>
+</body>
+</html>
